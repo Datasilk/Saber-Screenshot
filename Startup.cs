@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+﻿using System.IO;
 using OpenQA.Selenium.Chrome;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,9 +17,15 @@ namespace Saber.Vendors.Screenshot
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfigurationRoot config) 
         {
+            var path = App.MapPath("/Content/screenshots");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             var options = new ChromeOptions();
             options.AddArgument("headless");
-            WebDriver.Chrome = new ChromeDriver(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Vendors\\Screenshot\\", options);
+            WebDriver.Chrome = new ChromeDriver(App.MapPath("/Vendors/Screenshot/"), options);
         }
     }
 }

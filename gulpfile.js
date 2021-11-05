@@ -10,7 +10,7 @@ var publish = 'bin/Publish/';
 function publishToPlatform(platform) {
     return gulp.src([
         //include custom resources
-        //'websitesettings.html', 'websitesettings.js'
+		'chromedriver.exe',
         //include all files from published folder
         release + platform + '/publish/*',
         //exclude unwanted dependencies

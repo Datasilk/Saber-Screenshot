@@ -8,10 +8,10 @@ namespace Saber.Vendors.Screenshot
     public class Screenshot: Core.Service, IVendorService
     {
         private string OutputPath = "/Content/screenshots/";
-        public string Take (string path, int width, int height)
+        public string Take (string url, int width, int height)
         {
-            var id = DateTime.Now.ToString("yyyyMMdd-hhmm-") + path.ReplaceOnlyAlphaNumeric().Replace("/", "-").Replace(" ", "-");
-            WebDriver.Chrome.Navigate().GoToUrl(App.Host + "/" + path);
+            var id = DateTime.Now.ToString("yyyyMMdd-hhmm-") + url.ReplaceOnlyAlphaNumeric().Replace("/", "-").Replace(" ", "-");
+            WebDriver.Chrome.Navigate().GoToUrl(App.Host + "/" + url);
             WebDriver.Chrome.Manage().Window.Size = new System.Drawing.Size(width, height);
             IJavaScriptExecutor js = (IJavaScriptExecutor)WebDriver.Chrome;
             js.ExecuteScript(@"document.body.style.overflow = 'hidden';");

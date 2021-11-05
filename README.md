@@ -18,3 +18,12 @@ While using the latest release of Saber, do the following:
 ### Publish
 * run command `./publish.bat`
 * publish `bin/Publish/Screenshot.7z` as latest release
+
+### Use Public API
+```js
+S.ajax.post('Screenshot/Take', {url:'/blog/2021-11-05-Late-Night-Coding', width:1920, height:1080}, (response) => {apikey:'Y0UR-AP1-K3Y'});
+```
+
+Access the screenshot abilities from your own Saber plugin by using the JavaScript snippet above. Replace the `url` property with a relative web page URL 
+that belongs to your Saber website. You'll be required to add a Public API developer key to your
+`config.json` for Saber and use the developer key in place of `Y0UR-AP1-K3Y` in the example above.
