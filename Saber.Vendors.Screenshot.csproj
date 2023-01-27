@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Saber.Vendors.Screenshot</RootNamespace>
     <AssemblyName>Saber.Vendors.Screenshot</AssemblyName>
     <Authors>Mark Entingh</Authors>
@@ -11,14 +11,22 @@
     <RepositoryUrl>https://www.github.com/Datasilk/Saber-Screenshot</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
-
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-	<PackageReference Include="Selenium.Support" Version="4.0.1" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.0.1" />
+    <None Remove="chromedriver.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="chromedriver.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Saber.Core" Version="1.0.7.5" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+	<PackageReference Include="Selenium.Support" Version="4.8.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Saber.Core" Version="1.0.8" />
   </ItemGroup>
 </Project>
