@@ -41,7 +41,7 @@ namespace Saber.Vendors.Screenshot
                 throw new Exception("Error saving screenshot", ex);
                 
             }
-            return id + ".jpg";
+            return id + ".png";
         }
     }
 }
