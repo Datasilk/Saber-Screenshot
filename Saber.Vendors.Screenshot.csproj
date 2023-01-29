@@ -13,9 +13,17 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="chromedriver.exe" />
+    <None Remove="LICENSE" />
+    <None Remove="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="chromedriver.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LICENSE">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="README.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

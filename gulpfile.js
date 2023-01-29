@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     less = require('gulp-less');
 
 var app = 'Screenshot';
-var release = 'bin/Release/net5.0/';
+var release = 'bin/Release/net6.0/';
 var publish = 'bin/Publish/';
 
 function publishToPlatform(platform) {
@@ -13,10 +13,15 @@ function publishToPlatform(platform) {
 		'chromedriver.exe',
         //include all files from published folder
         release + platform + '/publish/*',
+        release + platform + '/publish/**',
         //exclude unwanted dependencies
         '!' + release + platform + '/publish/Core.dll',
+        '!' + release + platform + '/publish/Dapper.dll',
+        '!' + release + platform + '/publish/DOM.dll',
         '!' + release + platform + '/publish/Saber.Core.dll',
         '!' + release + platform + '/publish/Saber.Vendor.dll',
+        '!' + release + platform + '/publish/sni.dll',
+        '!' + release + platform + '/publish/System.Data.SqlClient.dll',
         '!' + release + platform + '/publish/*.deps.json'
     ]).pipe(gulp.dest(publish + '/' + platform + '/' + app, { overwrite: true }));
 }
