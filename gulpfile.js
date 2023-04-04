@@ -4,34 +4,30 @@ var gulp = require('gulp'),
     less = require('gulp-less');
 
 var app = 'Screenshot';
-var release = 'bin/Release/net6.0/';
+var release = 'bin/Release/net6.0/win-x64/publish/';
 var publish = 'bin/Publish/';
 
-function publishToPlatform(platform) {
+function publishToPlatform() {
+    //include selenium-manager from publish folder
+    gulp.src([
+        release + 'selenium-manager/**'
+    ]).pipe(gulp.dest(publish + '/' + app + "/selenium-manager", { overwrite: true }));
+
     return gulp.src([
-        //include custom resources
-		'chromedriver.exe',
-        //include all files from published folder
-        release + platform + '/publish/*',
-        release + platform + '/publish/**',
-        //exclude unwanted dependencies
-        '!' + release + platform + '/publish/Core.dll',
-        '!' + release + platform + '/publish/Dapper.dll',
-        '!' + release + platform + '/publish/DOM.dll',
-        '!' + release + platform + '/publish/Saber.Core.dll',
-        '!' + release + platform + '/publish/Saber.Vendor.dll',
-        '!' + release + platform + '/publish/sni.dll',
-        '!' + release + platform + '/publish/System.Data.SqlClient.dll',
-        '!' + release + platform + '/publish/*.deps.json'
-    ]).pipe(gulp.dest(publish + '/' + platform + '/' + app, { overwrite: true }));
+        //include files from published folder
+        release + 'chromedriver.exe',
+        release + 'LICENSE',
+        release + 'Newtonsoft.Json.dll',
+        release + 'README.md',
+        release + 'Saber.Vendors.Screenshot.dll',
+        release + 'Saber.Vendors.Screenshot.pdb',
+        release + 'WebDriver.dll',
+        release + 'WebDriver.Support.dll',
+    ]).pipe(gulp.dest(publish + '/' + app, { overwrite: true }));
 }
 
-gulp.task('publish:win-x64', () => {
-    return publishToPlatform('win-x64');
-});
-
-gulp.task('publish:linux-x64', () => {
-    return publishToPlatform('linux-x64');
+gulp.task('publish:x64', () => {
+    return publishToPlatform();
 });
 
 gulp.task('zip', () => {
@@ -47,4 +43,4 @@ gulp.task('zip', () => {
     return gulp.src('.');
 });
 
-gulp.task('publish', gulp.series('publish:win-x64', 'publish:linux-x64', 'zip'));
+gulp.task('publish', gulp.series('publish:x64', 'zip'));
