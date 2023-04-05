@@ -4,6 +4,7 @@ using Saber.Core;
 using Saber.Vendor;
 using Saber.Core.Extensions.Strings;
 using OpenQA.Selenium;
+using System.Linq;
 
 namespace Saber.Vendors.Screenshot
 {
@@ -25,7 +26,7 @@ namespace Saber.Vendors.Screenshot
             }
             try
             {
-                WebDriver.Chrome.Navigate().GoToUrl(App.Host + "/" + url);
+                WebDriver.Chrome.Navigate().GoToUrl(url);
                 WebDriver.Chrome.Manage().Window.Size = new System.Drawing.Size(width, height);
                 IJavaScriptExecutor js = WebDriver.Chrome;
                 if(js != null)
@@ -33,7 +34,9 @@ namespace Saber.Vendors.Screenshot
                     js.ExecuteScript(@"document.body.style.overflow = 'hidden';");
                 }
                 var screenshot = ((ITakesScreenshot)WebDriver.Chrome).GetScreenshot();
+                Console.WriteLine("Extracted screenshot from " + url);
                 screenshot.SaveAsFile(App.MapPath(OutputPath + id + ".png"), ScreenshotImageFormat.Png);
+                Console.WriteLine("Saved screenshot to " + App.MapPath(OutputPath + id + ".png"));
             }
             catch (Exception ex)
             {

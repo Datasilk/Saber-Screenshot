@@ -25,6 +25,7 @@ namespace Saber.Vendors.Screenshot
 
             var options = new ChromeOptions();
             options.AddArgument("headless");
+            options.BinaryLocation = App.MapPath("/Vendors/Screenshot/Chrome/chrome.exe");
             WebDriver.Chrome = new ChromeDriver(App.MapPath("/Vendors/Screenshot/"), options);
         }
     }
