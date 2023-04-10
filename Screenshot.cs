@@ -19,11 +19,13 @@ namespace Saber.Vendors.Screenshot
 
         public static string Take(IRequest request, string url, int width, int height)
         {
-            var id = DateTime.Now.ToString("yyyyMMdd-hhmm-") + url.ReplaceOnlyAlphaNumeric().Replace("/", "-").Replace(" ", "-");
-            if (id.Length > 28)
+            var urlparts = url.Replace("https://", "").Replace("http://", "").Split("/", 2);
+            if (urlparts[1].Length > 14)
             {
-                id = id.Substring(0, 28);
+                //trim URL part of ID so screenshot filename is 32 chars max (including extension)
+                urlparts[1] = urlparts[1].Right(14);
             }
+            var id = DateTime.Now.ToString("yyyyMMdd-hhmm-") + urlparts[1];
             try
             {
                 WebDriver.Chrome.Navigate().GoToUrl(url);
